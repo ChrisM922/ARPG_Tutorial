@@ -8,13 +8,18 @@ class Game:
     pygame.init()
     self.clock = pygame.time.Clock()
     pygame.display.set_caption("ARPG")
-    self.screen = pygame.display.set_mode((WIDTH, HEIGHT))
+    self.screen = pygame.display.set_mode((WIDTH, HEIGHT), pygame.FULLSCREEN|pygame.SCALED)
     self.font = pygame.font.Font(FONT, TILESIZE)
     self.running = True
 
     self.states = []
     self.splash_screen = SplashScreen(self)
     self.states.append(self.splash_screen)
+
+  def render_text(self, text, color, font, pos, centralised=True):
+    surf = font.render(str(text), False, color)
+    rect = surf.get_rect(center = pos) if centralised else surf.get_rect(topleft = pos)
+    self.screen.blit(surf, rect)
 
   def get_input(self):
     for event in pygame.event.get():
@@ -82,13 +87,13 @@ class Game:
         elif event.button == 2:
           INPUTS['scroll_up'] = False
 
-  def reset_input(self):
+  def reset_inputs(self):
     for key in INPUTS:
       INPUTS[key] = False
 
   def loop(self):
     while self.running:
-      dt = self.clock.tick()/1000
+      dt = self.clock.tick(30)/1000
       self.get_input()
       self.states[-1].update(dt)
       self.states[-1].draw(self.screen)
