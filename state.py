@@ -41,7 +41,7 @@ class Scene(State):
     self.update_sprites = pygame.sprite.Group()
     self.drawn_sprites = pygame.sprite.Group()
 
-    self.player = Player(self.game, self, [self.update_sprites,self.drawn_sprites ], (WIDTH/2, HEIGHT/2), 'player')
+    self.player = Player(self.game, self, [self.update_sprites,self.drawn_sprites ], (WIDTH/2, HEIGHT/2), 'ninja')
 
   # delete later
   def debugger(self, debug_list):

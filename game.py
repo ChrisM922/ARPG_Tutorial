@@ -9,7 +9,7 @@ class Game:
     self.clock = pygame.time.Clock()
     pygame.display.set_caption("ARPG")
     self.screen = pygame.display.set_mode((WIDTH, HEIGHT), pygame.FULLSCREEN|pygame.SCALED)
-    self.font = pygame.font.Font(FONT, TILESIZE)
+    self.font = pygame.font.Font(FONT, TILESIZE - 2)
     self.running = True
     self.fps = 60
 
@@ -115,6 +115,7 @@ class Game:
 
   def loop(self):
     while self.running:
+      
       dt = self.clock.tick(self.fps)/1000
       self.get_input()
       self.states[-1].update(dt)
