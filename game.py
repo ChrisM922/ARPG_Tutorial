@@ -1,4 +1,4 @@
-import pygame, sys
+import pygame, sys, os
 from settings import *
 from state import SplashScreen
 
@@ -9,8 +9,9 @@ class Game:
     self.clock = pygame.time.Clock()
     pygame.display.set_caption("ARPG")
     self.screen = pygame.display.set_mode((WIDTH, HEIGHT), pygame.FULLSCREEN|pygame.SCALED)
-    self.font = pygame.font.Font(FONT, TILESIZE)
+    self.font = pygame.font.Font(FONT, TILESIZE - 2)
     self.running = True
+    self.fps = 60
 
     self.states = []
     self.splash_screen = SplashScreen(self)
@@ -20,6 +21,27 @@ class Game:
     surf = font.render(str(text), False, color)
     rect = surf.get_rect(center = pos) if centralised else surf.get_rect(topleft = pos)
     self.screen.blit(surf, rect)
+
+  def custom_cursor(self, screen):
+    pygame.mouse.set_visible(False)
+    cursor_img = pygame.image.load('assets/cursor/cursor.png').convert_alpha()
+    cursor_rect = cursor_img.get_frect(center = pygame.mouse.get_pos())
+    cursor_img.set_alpha(150)
+    screen.blit(cursor_img, cursor_rect)
+
+  def get_images(self, path):
+    images = []
+    for file in os.listdir(path):
+      full_path = os.path.join(path, file)
+      image = pygame.image.load(full_path).convert_alpha()
+      images.append(image)
+    return images
+
+  def get_animations(self, path):
+    animations = {}
+    for file_name in os.listdir(path):
+      animations.update({file_name: []})
+    return animations
 
   def get_input(self):
     for event in pygame.event.get():
@@ -93,10 +115,12 @@ class Game:
 
   def loop(self):
     while self.running:
-      dt = self.clock.tick(30)/1000
+      
+      dt = self.clock.tick(self.fps)/1000
       self.get_input()
       self.states[-1].update(dt)
       self.states[-1].draw(self.screen)
+      self.custom_cursor(self.screen)
       pygame.display.update()
 
 if __name__ == '__main__':
