@@ -1,3 +1,5 @@
+from pygame.math import Vector2 as vec
+
 WIDTH, HEIGHT = 400 ,224
 TILESIZE = 16
 FONT = 'assets/homespun.ttf'
@@ -20,8 +22,9 @@ INPUTS = {
 COLORS = {
   'black': (0, 0, 0),
   'white': (255, 255, 255),
-  'red': (255, 0, 0),
-  'green': (0, 255, 0),
-  'blue': (0, 0, 255),
-  'yellow': (255, 255, 0),
+  'red': (255, 100, 100),
+  'green': (100, 255, 100),
+  'blue': (100, 100, 255),
+  'yellow': (255, 255, 100),
+  'green': (100, 255, 100),
 }

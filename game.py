@@ -11,6 +11,7 @@ class Game:
     self.screen = pygame.display.set_mode((WIDTH, HEIGHT), pygame.FULLSCREEN|pygame.SCALED)
     self.font = pygame.font.Font(FONT, TILESIZE)
     self.running = True
+    self.fps = 60
 
     self.states = []
     self.splash_screen = SplashScreen(self)
@@ -20,6 +21,10 @@ class Game:
     surf = font.render(str(text), False, color)
     rect = surf.get_rect(center = pos) if centralised else surf.get_rect(topleft = pos)
     self.screen.blit(surf, rect)
+
+  def custom_cursor(self, screen):
+    pygame.mouse.set_visible(False)
+    cursor_img = pygame.image.load('assets/cursor/cursor.png').convert_alpha()
 
   def get_input(self):
     for event in pygame.event.get():
@@ -93,7 +98,7 @@ class Game:
 
   def loop(self):
     while self.running:
-      dt = self.clock.tick(30)/1000
+      dt = self.clock.tick(self.fps)/1000
       self.get_input()
       self.states[-1].update(dt)
       self.states[-1].draw(self.screen)
