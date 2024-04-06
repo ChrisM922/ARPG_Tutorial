@@ -43,7 +43,7 @@ class Scene(State):
     self.update_sprites = pygame.sprite.Group()
     self.drawn_sprites = pygame.sprite.Group()
 
-    self.player = Player(self.game, self, [self.update_sprites,self.drawn_sprites ], (WIDTH/2, HEIGHT/2), 'ninja')
+    # self.player = Player(self.game, self, [self.update_sprites,self.drawn_sprites ], (WIDTH/2, HEIGHT/2), 'ninja')
 
     self.tmx_data = load_pygame('scenes/0/0.tmx')
     self.create_scene()
@@ -62,6 +62,12 @@ class Scene(State):
         if  obj.name == '0':
           self.player = Player(self.game, self, [self.update_sprites,self.drawn_sprites ], (obj.x, obj.y), 'ninja')
 
+    # if 'floor' in layers:
+    if 'floor' in layers:
+      for x, y, surf in self.tmx_data.get_layer_by_name('floor').tiles():
+        # use as a background
+        floor = Object([self.drawn_sprites], (x * TILESIZE, y * TILESIZE), surf)
+        self.fill = floor.fill
 
   # delete later
   def debugger(self, debug_list):
