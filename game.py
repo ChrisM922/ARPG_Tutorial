@@ -118,8 +118,8 @@ class Game:
       
       dt = self.clock.tick(self.fps)/1000
       self.get_input()
-      self.states[-1].update(dt)
       self.states[-1].draw(self.screen)
+      self.states[-1].update(dt)
       self.custom_cursor(self.screen)
       pygame.display.update()
 
