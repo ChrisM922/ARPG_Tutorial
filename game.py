@@ -8,7 +8,7 @@ class Game:
     pygame.init()
     self.clock = pygame.time.Clock()
     pygame.display.set_caption("ARPG")
-    self.screen = pygame.display.set_mode((WIDTH, HEIGHT), pygame.FULLSCREEN|pygame.SCALED)
+    self.screen = pygame.display.set_mode((WIDTH, HEIGHT), pygame.RESIZABLE | pygame.SCALED)  
     self.font = pygame.font.Font(FONT, TILESIZE - 2)
     self.running = True
     self.fps = 60
@@ -118,8 +118,8 @@ class Game:
       
       dt = self.clock.tick(self.fps)/1000
       self.get_input()
-      self.states[-1].update(dt)
       self.states[-1].draw(self.screen)
+      self.states[-1].update(dt)
       self.custom_cursor(self.screen)
       pygame.display.update()
 

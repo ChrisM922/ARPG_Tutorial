@@ -1,5 +1,6 @@
 import pygame
 from settings import *
+from camera import Camera
 from characters import Player
 from objects import Object
 from pytmx.util_pygame import load_pygame
@@ -40,10 +41,11 @@ class Scene(State):
   def __init__(self, game):
     State.__init__(self, game)
 
+    self.camera = Camera(self)
     self.update_sprites = pygame.sprite.Group()
     self.drawn_sprites = pygame.sprite.Group()
 
-    self.player = Player(self.game, self, [self.update_sprites,self.drawn_sprites ], (WIDTH/2, HEIGHT/2), 'ninja')
+    # self.player = Player(self.game, self, [self.update_sprites,self.drawn_sprites ], (WIDTH/2, HEIGHT/2), 'ninja')
 
     self.tmx_data = load_pygame('/scenes/0/0.tmx')
     self.create_scene()
@@ -52,6 +54,10 @@ class Scene(State):
     layers = []
     for layer in self.tmx_data.layers:
       layers.append(layer.name)
+      # if 'floor' in layers:
+    if 'floor' in layers:
+      for x, y, surf in self.tmx_data.get_layer_by_name('floor').tiles():
+        Object([self.drawn_sprites], (x * TILESIZE, y * TILESIZE), surf)
 
     if 'blocks' in layers:
       for x, y, surf in self.tmx_data.get_layer_by_name('blocks').tiles():
@@ -60,8 +66,7 @@ class Scene(State):
     if 'entries' in layers:
       for obj in self.tmx_data.get_layer_by_name('entries'):
         if  obj.name == '0':
-          self.player = Player(self.game, self, [self.update_sprites,self.drawn_sprites ], (obj.x, obj.y), 'ninja')
-
+          self.player = Player(self.game, self, [self.update_sprites,self.drawn_sprites ], (obj.x, obj.y), 'ninja')    
 
   # delete later
   def debugger(self, debug_list):
