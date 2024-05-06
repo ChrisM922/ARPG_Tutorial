@@ -45,7 +45,7 @@ class Scene(State):
     self.update_sprites = pygame.sprite.Group()
     self.drawn_sprites = pygame.sprite.Group()
 
-    # self.player = Player(self.game, self, [self.update_sprites,self.drawn_sprites ], (WIDTH/2, HEIGHT/2), 'ninja')
+    self.player = Player(self.game, self, [self.update_sprites,self.drawn_sprites ], (WIDTH/2, HEIGHT/2), 'ninja')
 
     self.tmx_data = load_pygame('/scenes/0/0.tmx')
     self.create_scene()

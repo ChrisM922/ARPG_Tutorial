@@ -9,7 +9,7 @@ class Game:
     self.clock = pygame.time.Clock()
     pygame.display.set_caption("ARPG")
     self.screen = pygame.display.set_mode((WIDTH, HEIGHT), pygame.RESIZABLE | pygame.SCALED)  
-    self.font = pygame.font.Font(FONT, TILESIZE - 2)
+    self.font = pygame.font.Font(FONT, TILESIZE)
     self.running = True
     self.fps = 60
 
