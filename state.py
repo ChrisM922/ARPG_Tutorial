@@ -75,10 +75,10 @@ class Scene(State):
 
   def update(self, dt):
     self.update_sprites.update(dt)
+    self.camera.update(dt, self.player)
 
   def draw(self, screen):
-    screen.fill(COLORS['red'])
-    self.drawn_sprites.draw(screen)
+    self.camera.draw(screen, self.drawn_sprites)
     self.debugger([
       str('FPS: ' + str(round(self.game.clock.get_fps(), 2))),
       str('Vel: ' + str(round(self.player.vel, 2)))

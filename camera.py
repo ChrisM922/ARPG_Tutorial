@@ -1,6 +1,4 @@
-from typing import Iterable
 import pygame
-from pygame.sprite import AbstractGroup
 from settings import *
 
 class Camera(pygame.sprite.Group):
@@ -10,7 +8,13 @@ class Camera(pygame.sprite.Group):
     self.delay = 2
 
   def update(self, target, dt):
-    pass
+    mouse = pygame.mouse.get_pos()
+
+    self.offset.x = target.rect.centerx - WIDTH/2
+    self.offset.y = target.rect.centery - HEIGHT/2
 
   def draw(self, screen, group):
-    pass
+    screen.fill(COLORS['red'])
+    for sprite in group:
+      offset = sprite.rect.topleft - self.offset
+      screen.blit(sprite.image, offset)
