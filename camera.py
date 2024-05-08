@@ -7,14 +7,14 @@ class Camera(pygame.sprite.Group):
     self.offset = vec()
     self.delay = 2
 
-  def update(self, target, dt):
+  def update(self, dt, target):
     mouse = pygame.mouse.get_pos()
 
-    self.offset.x = target.rect.centerx - WIDTH/2
-    self.offset.y = target.rect.centery - HEIGHT/2
+    self.offset.x = -target.rect.centerx + WIDTH/2
+    self.offset.y = -target.rect.centery + HEIGHT/2
 
   def draw(self, screen, group):
-    screen.fill(COLORS['red'])
+    screen.fill(COLORS['blue'])
+    # group.draw(screen)
     for sprite in group:
-      offset = sprite.rect.topleft - self.offset
-      screen.blit(sprite.image, offset)
+      screen.blit(sprite.image, sprite.rect.topleft + self.offset)

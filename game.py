@@ -115,7 +115,6 @@ class Game:
 
   def loop(self):
     while self.running:
-      
       dt = self.clock.tick(self.fps)/1000
       self.get_input()
       self.states[-1].draw(self.screen)
