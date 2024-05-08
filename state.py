@@ -36,7 +36,6 @@ class SplashScreen(State):
   def draw(self, screen):
     screen.fill(COLORS['black'])
     self.game.render_text('Welcome, press space to start!', COLORS['white'], self.game.font, (WIDTH/2, HEIGHT/2))
-
 class Scene(State):
   def __init__(self, game):
     State.__init__(self, game)
