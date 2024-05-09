@@ -12,8 +12,8 @@ class Camera(pygame.sprite.Group):
     mouse = pygame.mouse.get_pos()
 
     # generates a delay to the camera
-    self.offset.x = -target.rect.centerx + WIDTH/2
-    self.offset.y = -target.rect.centery + HEIGHT/2
+    self.offset.x += (-target.rect.centerx + WIDTH/2 + (WIDTH/2 - mouse[0]) - self.offset.x) 
+    self.offset.y += (-target.rect.centery + HEIGHT/2 + (HEIGHT/2 - mouse[1]) - self.offset.y)
 
     # camera follows the player
     self.visible_window.x =  -self.offset.x
