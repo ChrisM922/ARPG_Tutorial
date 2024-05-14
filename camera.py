@@ -24,10 +24,11 @@ class Camera(pygame.sprite.Group):
     self.offset.x += (-target.rect.centerx + WIDTH / 2 + (WIDTH/2 - mouse[0]) / 4 - self.offset.x) * (self.delay * dt)
     self.offset.y += (-target.rect.centery + HEIGHT / 2 + (HEIGHT/2 - mouse[1]) / 4 - self.offset.y) * (self.delay * dt)
 
+    # limits the camera to the scene size and center the camera on the player
     self.offset.x += max(0, min(self.offset.x,self.scene_size[0] / WIDTH))
     self.offset.y += max(0, min(self.offset.y, self.scene_size[1] / HEIGHT))
 
-    # camera follows the player
+    # renders the visible window
     self.visible_window.x =  -self.offset.x
     self.visible_window.y =  -self.offset.y
 
