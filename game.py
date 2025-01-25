@@ -25,7 +25,7 @@ class Game:
   def custom_cursor(self, screen):
     pygame.mouse.set_visible(False)
     cursor_img = pygame.image.load('assets/cursor/cursor.png').convert_alpha()
-    cursor_rect = cursor_img.get_frect(center = pygame.mouse.get_pos())
+    cursor_rect = cursor_img.get_rect(center = pygame.mouse.get_pos())
     cursor_img.set_alpha(150)
     screen.blit(cursor_img, cursor_rect)
 

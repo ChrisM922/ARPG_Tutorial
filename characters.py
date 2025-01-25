@@ -11,7 +11,7 @@ class NPC(pygame.sprite.Sprite):
     self.import_images(f'assets/characters/{self.name}/')
     self.frame_index = 0
     self.image = self.animations['idle'][self.frame_index].convert()
-    self.rect = self.image.get_frect(center = pos)
+    self.rect = self.image.get_rect(center = pos)
     self.speed = 90
     self.force = 2000
     self.acc = vec()

@@ -5,7 +5,7 @@ class Camera(pygame.sprite.Group):
   def __init__(self, scene):
 
     self.offset = vec()
-    self.visible_window = pygame.FRect(0,0, WIDTH, HEIGHT)
+    self.visible_window = pygame.Rect(0,0, WIDTH, HEIGHT)
     self.scene_size = self.get_scene_size(scene)
     self.delay = 3
 
